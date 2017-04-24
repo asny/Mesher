@@ -1,3 +1,19 @@
+.DS_Store
+
+# 3d model files
+*.3ds
+*.lwo
+*.mtl
+*.tif
+*.dxf
+*.mix
+
+# Xcode user project files
+*.xcuserstate
+*.xcscheme
+*.plist
+*.xcbkptlist
+
 # Compiled Object files
 *.slo
 *.lo
