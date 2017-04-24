@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		493CD3731EADD91B00E4FB57 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 493CD3721EADD91B00E4FB57 /* main.cpp */; };
+		493CD37A1EADDAD300E4FB57 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 493CD3791EADDAD300E4FB57 /* main.cpp */; };
+		493CD37D1EAE3F2600E4FB57 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493CD37C1EAE3F2600E4FB57 /* OpenGL.framework */; };
+		493CD3801EAE3F4500E4FB57 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493CD37E1EAE3F4500E4FB57 /* SDL2_image.framework */; };
+		493CD3811EAE3F4500E4FB57 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493CD37F1EAE3F4500E4FB57 /* SDL2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +27,10 @@
 
 /* Begin PBXFileReference section */
 		493CD36F1EADD91B00E4FB57 /* Mesher */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Mesher; sourceTree = BUILT_PRODUCTS_DIR; };
-		493CD3721EADD91B00E4FB57 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		493CD3791EADDAD300E4FB57 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = source/main.cpp; sourceTree = "<group>"; };
+		493CD37C1EAE3F2600E4FB57 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		493CD37E1EAE3F4500E4FB57 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
+		493CD37F1EAE3F4500E4FB57 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +38,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				493CD37D1EAE3F2600E4FB57 /* OpenGL.framework in Frameworks */,
+				493CD3801EAE3F4500E4FB57 /* SDL2_image.framework in Frameworks */,
+				493CD3811EAE3F4500E4FB57 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,8 +50,9 @@
 		493CD3661EADD91B00E4FB57 = {
 			isa = PBXGroup;
 			children = (
-				493CD3711EADD91B00E4FB57 /* Mesher */,
+				493CD3791EADDAD300E4FB57 /* main.cpp */,
 				493CD3701EADD91B00E4FB57 /* Products */,
+				493CD37B1EAE3F2600E4FB57 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,12 +64,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		493CD3711EADD91B00E4FB57 /* Mesher */ = {
+		493CD37B1EAE3F2600E4FB57 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				493CD3721EADD91B00E4FB57 /* main.cpp */,
+				493CD37E1EAE3F4500E4FB57 /* SDL2_image.framework */,
+				493CD37F1EAE3F4500E4FB57 /* SDL2.framework */,
+				493CD37C1EAE3F2600E4FB57 /* OpenGL.framework */,
 			);
-			path = Mesher;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				493CD3731EADD91B00E4FB57 /* main.cpp in Sources */,
+				493CD37A1EADDAD300E4FB57 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,14 +230,34 @@
 		493CD3771EADD91B00E4FB57 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/Library/Frameworks/SDL2.framework/Headers/,
+					/Library/Frameworks/SDL2_image.framework/Headers/,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include/glm /opt/local/include/GLFW ./../Mesh/include/ ./../GLEngine/include/";
 			};
 			name = Debug;
 		};
 		493CD3781EADD91B00E4FB57 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/Library/Frameworks/SDL2.framework/Headers/,
+					/Library/Frameworks/SDL2_image.framework/Headers/,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include/glm /opt/local/include/GLFW ./../Mesh/include/ ./../GLEngine/include/";
 			};
 			name = Release;
 		};
@@ -248,6 +280,7 @@
 				493CD3781EADD91B00E4FB57 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
