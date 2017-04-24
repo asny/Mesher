@@ -19,8 +19,6 @@ using namespace glm;
 using namespace gle;
 using namespace mesh;
 
-shared_ptr<float> cube_rotation_angle = make_shared<float>(0.f);
-
 void print_fps(double elapsedTime)
 {
     static int draws = 0;
@@ -42,31 +40,19 @@ void update()
     float elapsed_time = current_time - last_time;
     
     print_fps(elapsed_time);
-    *cube_rotation_angle = current_time;
     
     last_time = current_time;
 }
 
-void create_cube(GLScene& root, const vec3& translation, std::shared_ptr<GLMaterial> material)
-{
-    auto geometry = MeshCreator::create_box(false);
-    
-    auto translation_node = std::make_shared<GLTranslationNode>(translation);
-    auto rotation_node = std::make_shared<GLRotationNode>(vec3(1., 1., 0.), cube_rotation_angle);
-    
-    root.add_child(translation_node)->add_child(rotation_node)->add_leaf(geometry, material);
-}
-
-void create_cubes(GLScene& root)
+void create_scene(GLScene& root)
 {
     auto flat_material = make_shared<GLFlatColorMaterial>(vec3(0.5, 0.1, 0.7));
     auto color_material = make_shared<GLColorMaterial>(vec3(0.5, 0.1, 0.7));
-    auto standard_material = make_shared<GLStandardMaterial>(vec3(0.2, 0.2, 0.2), vec3(0.5, 0.1, 0.7), vec3(0.5, 0.1, 0.7), 1.);
     
-    create_cube(root, vec3(-2., 2., 0.), color_material);
-    create_cube(root, vec3(-2., -2., 0.), standard_material);
-    create_cube(root, vec3(2., 2., 0.), standard_material);
-    create_cube(root, vec3(2., -2., 0.), color_material);
+    shared_ptr<Mesh> mesh = make_shared<Mesh>();
+    MeshCreator::load_from_obj("bunny.obj", *mesh);
+    
+    root.add_child(make_shared<GLScaleNode>(2.))->add_leaf(mesh, flat_material);
 }
 
 int main(int argc, const char * argv[])
@@ -97,14 +83,14 @@ int main(int argc, const char * argv[])
     
     // Create camera
     auto camera = GLCamera(window_width, window_height);
-    camera.set_view(vec3(0., 0., 10.), vec3(0., 0., -1.));
+    camera.set_view(vec3(0., 0., 1.), vec3(0., 0., -1.));
     
     // Create scene
     auto scene = GLScene();
     auto directional_light = make_shared<GLDirectionalLight>();
     scene.add_light(directional_light);
     directional_light->direction = glm::vec3(1., -1., 0.);
-    create_cubes(scene);
+    create_scene(scene);
     
     // Create debug effect
     auto debug_effect = GLDebugEffect();
