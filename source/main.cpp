@@ -9,7 +9,6 @@
 #include "materials/GLColorMaterial.h"
 #include "materials/GLStandardMaterial.h"
 #include "effects/GLDebugEffect.h"
-#include "gtx/rotate_vector.hpp"
 
 #define SDL_MAIN_HANDLED
 #include "SDL.h"
@@ -18,6 +17,8 @@ using namespace std;
 using namespace glm;
 using namespace gle;
 using namespace mesh;
+
+vec3 rotation_center = vec3(0.f, 0.f, 0.f);
 
 void print_fps(double elapsedTime)
 {
@@ -51,8 +52,10 @@ void create_scene(GLScene& root)
     
     shared_ptr<Mesh> mesh = make_shared<Mesh>();
     MeshCreator::load_from_obj("bunny.obj", *mesh);
+    mesh->transform(glm::scale(glm::mat4(1.f), glm::vec3(10.)));
+    rotation_center = mesh->center();
     
-    root.add_child(make_shared<GLScaleNode>(2.))->add_leaf(mesh, flat_material);
+    root.add_leaf(mesh, flat_material);
 }
 
 int main(int argc, const char * argv[])
@@ -83,7 +86,6 @@ int main(int argc, const char * argv[])
     
     // Create camera
     auto camera = GLCamera(window_width, window_height);
-    camera.set_view(vec3(0., 0., 1.), vec3(0., 0., -1.));
     
     // Create scene
     auto scene = GLScene();
@@ -91,6 +93,8 @@ int main(int argc, const char * argv[])
     scene.add_light(directional_light);
     directional_light->direction = glm::vec3(1., -1., 0.);
     create_scene(scene);
+    
+    camera.set_view(rotation_center + vec3(0., 0., 10.), vec3(0., 0., -1.));
     
     // Create debug effect
     auto debug_effect = GLDebugEffect();
@@ -115,6 +119,10 @@ int main(int argc, const char * argv[])
                 debug_effect.type = gle::GLDebugEffect::NORMAL;
             if( e.key.keysym.sym == SDLK_3)
                 debug_effect.type = gle::GLDebugEffect::COLOR;
+            if( e.type == SDL_MOUSEWHEEL)
+            {
+                camera.zoom(e.wheel.y);
+            }
         }
         
         // update the scene based on the time elapsed since last update
