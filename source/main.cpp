@@ -45,6 +45,24 @@ void update()
     last_time = current_time;
 }
 
+void create_axes(GLScene& root)
+{
+    auto xaxis = MeshCreator::create_box(false);
+    xaxis->transform(glm::translate(mat4(1.), vec3(1., 0., 0.)));
+    xaxis->transform(glm::scale(mat4(1.), vec3(5., 0.05, 0.05)));
+    root.add_leaf(xaxis, make_shared<GLColorMaterial>(vec3(1., 0., 0.)));
+    
+    auto yaxis = MeshCreator::create_box(false);
+    yaxis->transform(glm::translate(mat4(1.), vec3(0., 1., 0.)));
+    yaxis->transform(glm::scale(mat4(1.), vec3(0.05, 5., 0.05)));
+    root.add_leaf(yaxis, make_shared<GLColorMaterial>(vec3(0., 1., 0.)));
+    
+    auto zaxis = MeshCreator::create_box(false);
+    zaxis->transform(glm::translate(mat4(1.), vec3(0., 0., 1.)));
+    zaxis->transform(glm::scale(mat4(1.), vec3(0.05, 0.05, 5.)));
+    root.add_leaf(zaxis, make_shared<GLColorMaterial>(vec3(0., 0., 1.)));
+}
+
 void create_scene(GLScene& root)
 {
     auto flat_material = make_shared<GLFlatColorMaterial>(vec3(0.5, 0.1, 0.7));
@@ -93,6 +111,7 @@ int main(int argc, const char * argv[])
     scene.add_light(directional_light);
     directional_light->direction = glm::vec3(1., -1., 0.);
     create_scene(scene);
+    create_axes(scene);
     
     camera.set_view(rotation_center + vec3(0., 0., 10.), vec3(0., 0., -1.));
     
