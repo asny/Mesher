@@ -33,6 +33,7 @@ void print_fps(double elapsedTime)
         draws = 0;
     }
 }
+shared_ptr<Mesh> model;
 
 void update()
 {
@@ -68,12 +69,12 @@ void create_scene(GLScene& root)
     auto flat_material = make_shared<GLFlatColorMaterial>(vec3(0.5, 0.1, 0.7));
     auto color_material = make_shared<GLColorMaterial>(vec3(0.5, 0.1, 0.7));
     
-    shared_ptr<Mesh> mesh = make_shared<Mesh>();
-    MeshCreator::load_from_obj("bunny.obj", *mesh);
-    mesh->transform(glm::scale(glm::mat4(1.f), glm::vec3(10.)));
-    rotation_center = mesh->center();
+    model = make_shared<Mesh>();
+    MeshCreator::load_from_obj("bunny.obj", *model);
+    model->transform(glm::scale(glm::mat4(1.f), glm::vec3(10.)));
+    model->transform(glm::translate(glm::mat4(1.f), -model->center()));
     
-    root.add_leaf(mesh, flat_material);
+    root.add_leaf(model, flat_material);
 }
 
 int main(int argc, const char * argv[])
