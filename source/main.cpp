@@ -9,6 +9,8 @@
 #include "materials/GLColorMaterial.h"
 #include "materials/GLStandardMaterial.h"
 #include "effects/GLDebugEffect.h"
+#include "Search.h"
+#include "Morph.hpp"
 
 #define SDL_MAIN_HANDLED
 #include "SDL.h"
@@ -119,6 +121,15 @@ int main(int argc, const char * argv[])
                 auto position = camera.get_position() + static_cast<float>(e.wheel.y) * camera.get_direction();
                 camera.set_view(position, camera.get_direction());
             }
+            if( e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
+            {
+                auto view_ray_origin = camera.get_position();
+                auto view_ray_direction = camera.get_view_direction_at(e.button.x, e.button.y);
+                auto vertex = Search::closest_vertex(*model, view_ray_origin, view_ray_direction);
+                if(vertex)
+                {
+                    Morph::apply(*model, vertex, 0.01);
+                }
             }
         }
         
