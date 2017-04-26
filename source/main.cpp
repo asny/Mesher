@@ -114,17 +114,11 @@ int main(int argc, const char * argv[])
             {
                 quit = true;
             }
-            if( e.key.keysym.sym == SDLK_0)
-                debug_effect.type = gle::GLDebugEffect::NONE;
-            if( e.key.keysym.sym == SDLK_1)
-                debug_effect.type = gle::GLDebugEffect::POSITION;
-            if( e.key.keysym.sym == SDLK_2)
-                debug_effect.type = gle::GLDebugEffect::NORMAL;
-            if( e.key.keysym.sym == SDLK_3)
-                debug_effect.type = gle::GLDebugEffect::COLOR;
             if( e.type == SDL_MOUSEWHEEL)
             {
-                camera.zoom(e.wheel.y);
+                auto position = camera.get_position() + static_cast<float>(e.wheel.y) * camera.get_direction();
+                camera.set_view(position, camera.get_direction());
+            }
             }
         }
         
