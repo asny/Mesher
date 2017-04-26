@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6637DB35BC0B22BFCBDC57135C6F9D1CEA81FDDC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "5C90B2209D2DAB95601B2B50EEF3562D98E0927F" : 9223372036854775807,
+    "6637DB35BC0B22BFCBDC57135C6F9D1CEA81FDDC" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "328DE098-9261-405C-BA6D-C6256A202FC3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "5C90B2209D2DAB95601B2B50EEF3562D98E0927F" : "Mesh\/",
+    "6637DB35BC0B22BFCBDC57135C6F9D1CEA81FDDC" : "Mesher\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Mesher",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Mesher.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/asny\/Mesh.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5C90B2209D2DAB95601B2B50EEF3562D98E0927F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/asny\/Mesher.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6637DB35BC0B22BFCBDC57135C6F9D1CEA81FDDC"
+    }
+  ]
+}

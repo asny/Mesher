@@ -11,6 +11,7 @@
 		493CD37D1EAE3F2600E4FB57 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493CD37C1EAE3F2600E4FB57 /* OpenGL.framework */; };
 		493CD3801EAE3F4500E4FB57 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493CD37E1EAE3F4500E4FB57 /* SDL2_image.framework */; };
 		493CD3811EAE3F4500E4FB57 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493CD37F1EAE3F4500E4FB57 /* SDL2.framework */; };
+		49CC18751EAFBC01007EB9AA /* Morph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49CC18731EAFBC01007EB9AA /* Morph.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,14 @@
 		493CD37C1EAE3F2600E4FB57 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		493CD37E1EAE3F4500E4FB57 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		493CD37F1EAE3F4500E4FB57 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		49CC186D1EAFBBA9007EB9AA /* Attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attribute.h; sourceTree = "<group>"; };
+		49CC186E1EAFBBA9007EB9AA /* ID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ID.h; sourceTree = "<group>"; };
+		49CC186F1EAFBBA9007EB9AA /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
+		49CC18701EAFBBA9007EB9AA /* MeshCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshCreator.h; sourceTree = "<group>"; };
+		49CC18711EAFBBA9007EB9AA /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Property.h; sourceTree = "<group>"; };
+		49CC18731EAFBC01007EB9AA /* Morph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Morph.cpp; path = source/Morph.cpp; sourceTree = "<group>"; };
+		49CC18741EAFBC01007EB9AA /* Morph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Morph.hpp; path = source/Morph.hpp; sourceTree = "<group>"; };
+		49CC18761EAFBE62007EB9AA /* Search.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Search.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +59,8 @@
 		493CD3661EADD91B00E4FB57 = {
 			isa = PBXGroup;
 			children = (
+				49CC186C1EAFBBA9007EB9AA /* Mesh */,
+				49CC18721EAFBBE5007EB9AA /* Mesher */,
 				493CD3791EADDAD300E4FB57 /* main.cpp */,
 				493CD3701EADD91B00E4FB57 /* Products */,
 				493CD37B1EAE3F2600E4FB57 /* Frameworks */,
@@ -72,6 +83,29 @@
 				493CD37C1EAE3F2600E4FB57 /* OpenGL.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		49CC186C1EAFBBA9007EB9AA /* Mesh */ = {
+			isa = PBXGroup;
+			children = (
+				49CC186D1EAFBBA9007EB9AA /* Attribute.h */,
+				49CC186E1EAFBBA9007EB9AA /* ID.h */,
+				49CC186F1EAFBBA9007EB9AA /* Mesh.h */,
+				49CC18701EAFBBA9007EB9AA /* MeshCreator.h */,
+				49CC18711EAFBBA9007EB9AA /* Property.h */,
+				49CC18761EAFBE62007EB9AA /* Search.h */,
+			);
+			name = Mesh;
+			path = ../Mesh/include;
+			sourceTree = "<group>";
+		};
+		49CC18721EAFBBE5007EB9AA /* Mesher */ = {
+			isa = PBXGroup;
+			children = (
+				49CC18731EAFBC01007EB9AA /* Morph.cpp */,
+				49CC18741EAFBC01007EB9AA /* Morph.hpp */,
+			);
+			name = Mesher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,6 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49CC18751EAFBC01007EB9AA /* Morph.cpp in Sources */,
 				493CD37A1EADDAD300E4FB57 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
