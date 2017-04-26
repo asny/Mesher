@@ -18,21 +18,6 @@ using namespace glm;
 using namespace gle;
 using namespace mesh;
 
-vec3 rotation_center = vec3(0.f, 0.f, 0.f);
-
-void print_fps(double elapsedTime)
-{
-    static int draws = 0;
-    draws++;
-    static float seconds = 0.;
-    seconds += elapsedTime;
-    if(seconds > 5)
-    {
-        std::cout << "FPS: " << ((float)draws)/seconds << std::endl;
-        seconds = 0.;
-        draws = 0;
-    }
-}
 shared_ptr<Mesh> model;
 
 void update()
@@ -40,8 +25,6 @@ void update()
     static float last_time = time();
     float current_time = time();
     float elapsed_time = current_time - last_time;
-    
-    print_fps(elapsed_time);
     
     last_time = current_time;
 }
@@ -114,7 +97,7 @@ int main(int argc, const char * argv[])
     create_scene(scene);
     create_axes(scene);
     
-    camera.set_view(rotation_center + vec3(0., 0., 10.), vec3(0., 0., -1.));
+    camera.set_view(vec3(0., 0., 10.), vec3(0., 0., -1.));
     
     // Create debug effect
     auto debug_effect = GLDebugEffect();
