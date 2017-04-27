@@ -158,7 +158,7 @@ int main(int argc, const char * argv[])
                 up_direction = glm::cross(right_direction, direction);
                 glm::vec3 camera_position = camera.get_position();
                 float zoom = length(camera_position);
-                camera_position += static_cast<float>(e.motion.xrel) * right_direction + static_cast<float>(e.motion.yrel) * up_direction;
+                camera_position += 0.1f * (static_cast<float>(e.motion.xrel) * right_direction + static_cast<float>(e.motion.yrel) * up_direction);
                 camera_position = zoom * normalize(camera_position);
                 camera.set_view(camera_position, glm::normalize(-camera_position));
             }
