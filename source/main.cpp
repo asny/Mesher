@@ -9,6 +9,7 @@
 #include "materials/GLColorMaterial.h"
 #include "materials/GLSkyboxMaterial.h"
 #include "effects/GLDebugEffect.h"
+#include "effects/GLAmbientOcclusionEffect.h"
 #include "Search.h"
 #include "Morph.hpp"
 
@@ -111,6 +112,7 @@ int main(int argc, const char * argv[])
     
     // Create debug effect
     auto debug_effect = GLDebugEffect();
+    auto ssao = GLAmbientOcclusionEffect();
     
     // run while the window is open
     bool quit = false;
@@ -172,6 +174,7 @@ int main(int argc, const char * argv[])
         
         // draw one frame
         camera.draw(scene);
+        camera.apply_post_effect(ssao);
         camera.apply_post_effect(debug_effect);
         
         SDL_GL_SwapWindow(window);
