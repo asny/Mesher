@@ -7,7 +7,7 @@
 #include "MeshCreator.h"
 #include "materials/GLFlatColorMaterial.h"
 #include "materials/GLColorMaterial.h"
-#include "materials/GLStandardMaterial.h"
+#include "materials/GLSkyboxMaterial.h"
 #include "effects/GLDebugEffect.h"
 #include "Search.h"
 #include "Morph.hpp"
@@ -60,6 +60,15 @@ void create_scene(GLScene& root)
     model->transform(glm::translate(glm::mat4(1.f), -model->center()));
     
     root.add_leaf(model, flat_material);
+    
+    const string path = "resources/skybox_evening/";
+    auto filenames = {path + "right.jpg", path + "left.jpg", path + "top.jpg", path + "top.jpg", path + "front.jpg", path + "back.jpg"};
+    auto skybox_texture = make_shared<GLTexture3D>(filenames);
+    
+    // Create skybox
+    auto skybox_material = make_shared<GLSkyboxMaterial>(skybox_texture);
+    auto skybox_geometry = MeshCreator::create_box(true);
+    root.add_leaf(skybox_geometry, skybox_material);
 }
 
 int main(int argc, const char * argv[])
