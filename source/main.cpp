@@ -116,6 +116,7 @@ int main(int argc, const char * argv[])
     // run while the window is open
     bool quit = false;
     bool mouse_rotation = false;
+    Morph morph;
     while(!quit)
     {
         // process pending events
@@ -138,7 +139,7 @@ int main(int argc, const char * argv[])
                 auto vertex = Search::closest_vertex(*model, view_ray_origin, view_ray_direction);
                 if(vertex)
                 {
-                    Morph::apply(*model, vertex, 0.01);
+                    morph.start(model.get(), vertex);
                 }
                 else {
                     mouse_rotation = true;
@@ -147,6 +148,7 @@ int main(int argc, const char * argv[])
             if( e.type == SDL_MOUSEBUTTONUP && e.button.button == SDL_BUTTON_LEFT)
             {
                 mouse_rotation = false;
+                morph.end();
             }
             if(mouse_rotation && e.type == SDL_MOUSEMOTION)
             {
@@ -159,6 +161,10 @@ int main(int argc, const char * argv[])
                 camera_position += static_cast<float>(e.motion.xrel) * right_direction + static_cast<float>(e.motion.yrel) * up_direction;
                 camera_position = zoom * normalize(camera_position);
                 camera.set_view(camera_position, glm::normalize(-camera_position));
+            }
+            if(morph.is_morphing() && e.type == SDL_MOUSEMOTION)
+            {
+                morph.update(static_cast<float>(e.motion.yrel));
             }
         }
         

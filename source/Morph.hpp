@@ -7,15 +7,35 @@
 
 #include "Mesh.h"
 
-class Morph {
-    
+class Morph
+{
+    glm::vec3 direction;
+    mesh::Mesh* model;
+    const mesh::VertexID* vertex = nullptr;
     
 public:
     
-    static void apply(mesh::Mesh& mesh, const mesh::VertexID* vertex, float value)
+    void start(mesh::Mesh* _model, const mesh::VertexID* _vertex)
     {
-        glm::vec3 pos = mesh.position()->at(vertex);
-        mesh.position()->at(vertex) = pos + mesh.normal(vertex) * value;
+        model = _model;
+        vertex = _vertex;
+        direction = model->normal(vertex);
+    }
+    
+    void update(float power)
+    {
+        glm::vec3 position = model->position()->at(vertex);
+        model->position()->at(vertex) = position + direction * power * 0.01f;
+    }
+    
+    void end()
+    {
+        vertex = nullptr;
+    }
+    
+    bool is_morphing()
+    {
+        return vertex != nullptr;
     }
     
 };
