@@ -59,16 +59,12 @@ void create_scene(GLScene& root)
     model->transform(glm::scale(glm::mat4(1.f), glm::vec3(10.)));
     model->transform(glm::translate(glm::mat4(1.f), -model->center()));
     
-    root.add_leaf(model, flat_material);
+    root.add_leaf(model, color_material);
     
-    const string path = "resources/skybox_evening/";
-    auto filenames = {path + "right.jpg", path + "left.jpg", path + "top.jpg", path + "top.jpg", path + "front.jpg", path + "back.jpg"};
-    auto skybox_texture = make_shared<GLTexture3D>(filenames);
-    
-    // Create skybox
-    auto skybox_material = make_shared<GLSkyboxMaterial>(skybox_texture);
-    auto skybox_geometry = MeshCreator::create_box(true);
-    root.add_leaf(skybox_geometry, skybox_material);
+    // Create box
+    auto box = MeshCreator::create_box(true);
+    auto box_material = make_shared<GLColorMaterial>(vec3(0.9, 0.9, 0.9));
+    root.add_child(make_shared<GLScaleNode>(5.))->add_leaf(box, box_material);
 }
 
 int main(int argc, const char * argv[])
@@ -104,7 +100,10 @@ int main(int argc, const char * argv[])
     auto scene = GLScene();
     auto directional_light = make_shared<GLDirectionalLight>();
     scene.add_light(directional_light);
-    directional_light->direction = glm::vec3(1., -1., 0.);
+    directional_light->direction = normalize(vec3(0.5, -1., -0.5));
+    auto directional_light2 = make_shared<GLDirectionalLight>();
+    scene.add_light(directional_light2);
+    directional_light2->direction = normalize(vec3(-0.5, -1., 0.5));
     create_scene(scene);
     create_axes(scene);
     
