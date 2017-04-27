@@ -115,6 +115,7 @@ int main(int argc, const char * argv[])
     
     // run while the window is open
     bool quit = false;
+    bool mouse_rotation = false;
     while(!quit)
     {
         // process pending events
@@ -139,6 +140,25 @@ int main(int argc, const char * argv[])
                 {
                     Morph::apply(*model, vertex, 0.01);
                 }
+                else {
+                    mouse_rotation = true;
+                }
+            }
+            if( e.type == SDL_MOUSEBUTTONUP && e.button.button == SDL_BUTTON_LEFT)
+            {
+                mouse_rotation = false;
+            }
+            if(mouse_rotation && e.type == SDL_MOUSEMOTION)
+            {
+                glm::vec3 direction = camera.get_direction();
+                glm::vec3 up_direction = glm::vec3(0., 1., 0.);
+                glm::vec3 right_direction = glm::cross(direction, up_direction);
+                up_direction = glm::cross(right_direction, direction);
+                glm::vec3 camera_position = camera.get_position();
+                float zoom = length(camera_position);
+                camera_position += static_cast<float>(e.motion.xrel) * right_direction + static_cast<float>(e.motion.yrel) * up_direction;
+                camera_position = zoom * normalize(camera_position);
+                camera.set_view(camera_position, glm::normalize(-camera_position));
             }
         }
         
