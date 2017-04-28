@@ -137,10 +137,10 @@ int main(int argc, const char * argv[])
             {
                 auto view_ray_origin = camera.get_position();
                 auto view_ray_direction = camera.get_view_direction_at(e.button.x, e.button.y);
-                auto vertex = Search::closest_vertex(*model, view_ray_origin, view_ray_direction);
-                if(vertex)
+                auto result = Search::closest_face(*model, view_ray_origin, view_ray_direction);
+                if(result.face_id)
                 {
-                    morph.start(model.get(), vertex);
+                    morph.start(model.get(), result.point, result.face_id->v1());
                 }
                 else {
                     mouse_rotation = true;

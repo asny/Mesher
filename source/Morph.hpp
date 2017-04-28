@@ -36,11 +36,11 @@ class Morph
     
 public:
     
-    void start(mesh::Mesh* _model, const mesh::VertexID* vertex)
+    void start(mesh::Mesh* _model, const glm::vec3& origin, const mesh::VertexID* vertex)
     {
         model = _model;
         direction = model->normal(vertex);
-        update_weights(model->position()->at(vertex), vertex);
+        update_weights(origin, vertex);
     }
     
     void update(float power)
