@@ -129,6 +129,14 @@ int main(int argc, const char * argv[])
             {
                 quit = true;
             }
+            if( e.key.keysym.sym == SDLK_0)
+                debug_effect.type = gle::GLDebugEffect::NONE;
+            if( e.key.keysym.sym == SDLK_1)
+                debug_effect.type = gle::GLDebugEffect::POSITION;
+            if( e.key.keysym.sym == SDLK_2)
+                debug_effect.type = gle::GLDebugEffect::NORMAL;
+            if( e.key.keysym.sym == SDLK_3)
+                debug_effect.type = gle::GLDebugEffect::COLOR;
             if( e.key.state == SDL_PRESSED && e.key.keysym.sym == SDLK_m)
             {
                 ssao_enabled = !ssao_enabled;
