@@ -117,6 +117,7 @@ int main(int argc, const char * argv[])
     // run while the window is open
     bool quit = false;
     bool mouse_rotation = false;
+    bool ssao_enabled = true;
     Morph morph;
     while(!quit)
     {
@@ -127,6 +128,10 @@ int main(int argc, const char * argv[])
             if( e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
             {
                 quit = true;
+            }
+            if( e.key.state == SDL_PRESSED && e.key.keysym.sym == SDLK_m)
+            {
+                ssao_enabled = !ssao_enabled;
             }
             if( e.type == SDL_MOUSEWHEEL)
             {
@@ -174,7 +179,8 @@ int main(int argc, const char * argv[])
         
         // draw one frame
         camera.draw(scene);
-        camera.apply_post_effect(ssao);
+        if(ssao_enabled)
+            camera.apply_post_effect(ssao);
         camera.apply_post_effect(debug_effect);
         
         SDL_GL_SwapWindow(window);
