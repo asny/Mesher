@@ -64,7 +64,7 @@ void create_scene(GLScene& root)
     
     // Create box
     auto box = MeshCreator::create_box(true);
-    auto box_material = make_shared<GLColorMaterial>(vec3(0.9, 0.9, 0.9));
+    auto box_material = make_shared<GLFlatColorMaterial>(vec3(0.9, 0.9, 0.9));
     root.add_child(make_shared<GLScaleNode>(5.))->add_leaf(box, box_material);
 }
 
