@@ -102,9 +102,11 @@ int main(int argc, const char * argv[])
     auto directional_light = make_shared<GLDirectionalLight>();
     scene.add_light(directional_light);
     directional_light->direction = normalize(vec3(0.5, -1., -0.5));
+    directional_light->diffuse_intensity = 0.2f;
     auto directional_light2 = make_shared<GLDirectionalLight>();
     scene.add_light(directional_light2);
     directional_light2->direction = normalize(vec3(-0.5, -1., 0.5));
+    directional_light2->diffuse_intensity = 0.2f;
     create_scene(scene);
     create_axes(scene);
     
