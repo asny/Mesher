@@ -8,6 +8,7 @@
 #include "materials/GLFlatColorMaterial.h"
 #include "materials/GLColorMaterial.h"
 #include "materials/GLSkyboxMaterial.h"
+#include "materials/GLWireframeMaterial.h"
 #include "effects/GLDebugEffect.h"
 #include "effects/GLAmbientOcclusionEffect.h"
 #include "Search.h"
@@ -22,6 +23,7 @@ using namespace gle;
 using namespace mesh;
 
 shared_ptr<Mesh> model;
+shared_ptr<bool> wireframe_enabled = make_shared<bool>(false);
 
 void update()
 {
@@ -54,12 +56,14 @@ void create_scene(GLScene& root)
 {
     auto flat_material = make_shared<GLFlatColorMaterial>(vec3(0.5, 0.1, 0.7));
     auto color_material = make_shared<GLColorMaterial>(vec3(0.5, 0.1, 0.7));
+    auto wireframe_material = make_shared<GLWireframeMaterial>(vec3(0.9, 0.1, 0.1));
     
     model = make_shared<Mesh>();
     MeshCreator::load_from_obj("bunny.obj", *model);
     model->transform(glm::scale(glm::mat4(1.f), glm::vec3(20.)));
     model->transform(glm::translate(glm::mat4(1.f), -model->center()));
     
+    root.add_child(make_shared<GLSwitchNode>(wireframe_enabled))->add_leaf(model, wireframe_material);
     root.add_leaf(model, color_material);
     
     // Create box
@@ -142,6 +146,10 @@ int main(int argc, const char * argv[])
             if( e.key.state == SDL_PRESSED && e.key.keysym.sym == SDLK_m)
             {
                 ssao_enabled = !ssao_enabled;
+            }
+            if( e.key.state == SDL_PRESSED && e.key.keysym.sym == SDLK_w)
+            {
+                *wireframe_enabled = !*wireframe_enabled;
             }
             if( e.type == SDL_MOUSEWHEEL)
             {
