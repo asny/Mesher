@@ -11,6 +11,7 @@
 #include "materials/GLWireframeMaterial.h"
 #include "effects/GLDebugEffect.h"
 #include "effects/GLAmbientOcclusionEffect.h"
+#include "GLEventHandler.h"
 #include "Search.h"
 #include "Morph.hpp"
 
@@ -122,7 +123,6 @@ int main(int argc, const char * argv[])
     
     // run while the window is open
     bool quit = false;
-    bool mouse_rotation = false;
     bool ssao_enabled = true;
     Morph morph;
     while(!quit)
@@ -151,11 +151,6 @@ int main(int argc, const char * argv[])
             {
                 *wireframe_enabled = !*wireframe_enabled;
             }
-            if( e.type == SDL_MOUSEWHEEL)
-            {
-                auto position = camera.get_position() + static_cast<float>(e.wheel.y) * camera.get_direction();
-                camera.set_view(position, camera.get_direction());
-            }
             if( e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
             {
                 auto view_ray_origin = camera.get_position();
@@ -165,30 +160,18 @@ int main(int argc, const char * argv[])
                 {
                     morph.start(model.get(), result.point, result.face_id->v1());
                 }
-                else {
-                    mouse_rotation = true;
-                }
-            }
-            if( e.type == SDL_MOUSEBUTTONUP && e.button.button == SDL_BUTTON_LEFT)
-            {
-                mouse_rotation = false;
-                morph.end();
-            }
-            if(mouse_rotation && e.type == SDL_MOUSEMOTION)
-            {
-                glm::vec3 direction = camera.get_direction();
-                glm::vec3 up_direction = glm::vec3(0., 1., 0.);
-                glm::vec3 right_direction = glm::cross(direction, up_direction);
-                up_direction = glm::cross(right_direction, direction);
-                glm::vec3 camera_position = camera.get_position();
-                float zoom = length(camera_position);
-                camera_position += 0.1f * (static_cast<float>(e.motion.xrel) * right_direction + static_cast<float>(e.motion.yrel) * up_direction);
-                camera_position = zoom * normalize(camera_position);
-                camera.set_view(camera_position, glm::normalize(-camera_position));
             }
             if(morph.is_morphing() && e.type == SDL_MOUSEMOTION)
             {
                 morph.update(static_cast<float>(e.motion.yrel));
+            }
+            if( e.type == SDL_MOUSEBUTTONUP && e.button.button == SDL_BUTTON_LEFT)
+            {
+                morph.end();
+            }
+            if(!morph.is_morphing())
+            {
+                GLEventHandler::navigate(e, camera);
             }
         }
         
