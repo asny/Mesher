@@ -24,16 +24,7 @@ using namespace gle;
 using namespace mesh;
 
 shared_ptr<Mesh> model;
-shared_ptr<bool> wireframe_enabled = make_shared<bool>(false);
-
-void update()
-{
-    static float last_time = time();
-    float current_time = time();
-    float elapsed_time = current_time - last_time;
-    
-    last_time = current_time;
-}
+shared_ptr<bool> wireframe_enabled = make_shared<bool>(true);
 
 void create_axes(GLScene& root)
 {
@@ -164,12 +155,9 @@ int main(int argc, const char * argv[])
             }
             if(!morph.is_morphing())
             {
-                GLEventHandler::navigate(e, camera);
+                GLEventHandler::navigate_spherical(e, camera);
             }
         }
-        
-        // update the scene based on the time elapsed since last update
-        update();
         
         // draw one frame
         camera.draw(scene);
