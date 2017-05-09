@@ -12,7 +12,6 @@
 #include "effects/GLDebugEffect.h"
 #include "effects/GLAmbientOcclusionEffect.h"
 #include "GLEventHandler.h"
-#include "Search.h"
 #include "Morph.hpp"
 
 #define SDL_MAIN_HANDLED
@@ -135,27 +134,27 @@ int main(int argc, const char * argv[])
             {
                 *wireframe_enabled = !*wireframe_enabled;
             }
-            if( e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
+            
+            if(morph.is_morphing())
             {
-                auto view_ray_origin = camera.get_position();
-                auto view_ray_direction = camera.get_view_direction_at(e.button.x, e.button.y);
-                auto result = Search::closest_face(*model, view_ray_origin, view_ray_direction);
-                if(result.face_id)
+                if( e.type == SDL_MOUSEMOTION )
+                {
+                    morph.update(static_cast<float>(e.motion.yrel));
+                }
+                if( e.type == SDL_MOUSEBUTTONUP && e.button.button == SDL_BUTTON_LEFT )
+                {
+                    morph.end();
+                }
+            }
+            else {
+                auto result = GLEventHandler::picking(e, camera, *model);
+                if(result.is_a_hit())
                 {
                     morph.start(model.get(), result.point, result.face_id->v1());
                 }
-            }
-            if(morph.is_morphing() && e.type == SDL_MOUSEMOTION)
-            {
-                morph.update(static_cast<float>(e.motion.yrel));
-            }
-            if( e.type == SDL_MOUSEBUTTONUP && e.button.button == SDL_BUTTON_LEFT)
-            {
-                morph.end();
-            }
-            if(!morph.is_morphing())
-            {
-                GLEventHandler::navigate_spherical(e, camera);
+                else {
+                    GLEventHandler::navigate_spherical(e, camera);
+                }
             }
         }
         
