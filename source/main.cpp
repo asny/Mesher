@@ -3,7 +3,6 @@
 //  Copyright © 2016 Asger Nyman Christiansen. All rights reserved.
 //
 
-#include "GLCamera.h"
 #include "MeshCreator.h"
 #include "materials/GLFlatColorMaterial.h"
 #include "materials/GLColorMaterial.h"
