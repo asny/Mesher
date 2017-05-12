@@ -50,7 +50,7 @@ void create_scene(GLScene& root)
     auto wireframe_material = make_shared<GLWireframeMaterial>(vec3(0.9, 0.1, 0.1));
     
     model = make_shared<Mesh>();
-    MeshCreator::load_from_obj("bunny.obj", *model);
+    MeshCreator::load_from_obj("../Models/bunny.obj", *model);
     model->transform(glm::scale(glm::mat4(1.f), glm::vec3(20.)));
     model->transform(glm::translate(glm::mat4(1.f), -model->center()));
     
