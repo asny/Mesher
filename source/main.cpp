@@ -51,8 +51,13 @@ void create_scene(GLScene& root)
     
     model = make_shared<Mesh>();
     MeshCreator::load_from_obj("../Models/bunny.obj", *model);
-    model->transform(glm::scale(glm::mat4(1.f), glm::vec3(20.)));
-    model->transform(glm::translate(glm::mat4(1.f), -model->center()));
+    auto min_pos = model->min();
+    auto max_pos = model->max();
+    auto size = max_pos - min_pos;
+    auto center = min_pos + 0.5f * size;
+    model->transform(glm::translate(glm::mat4(1.f), -center));
+    float scale = 5.f/std::max(std::max(size.x, size.y), size.z);
+    model->transform(glm::scale(glm::mat4(1.f), glm::vec3(scale, scale, scale)));
     
     root.add_child(make_shared<GLSwitchNode>(wireframe_enabled))->add_leaf(model, wireframe_material);
     root.add_leaf(model, color_material);
@@ -103,9 +108,9 @@ int main(int argc, const char * argv[])
     directional_light2->direction = normalize(vec3(-0.5, -1., 0.5));
     directional_light2->diffuse_intensity = 0.2f;
     create_scene(scene);
-//    create_axes(scene);
+    create_axes(scene);
     
-    camera.set_view(vec3(4., 4., 4.), vec3(-1., -1., -1.));
+    camera.set_view(vec3(7., 7., 7.), vec3(-1., -1., -1.));
     
     // Create debug effect
     auto debug_effect = GLDebugEffect();
