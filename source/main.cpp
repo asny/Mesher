@@ -4,6 +4,7 @@
 //
 
 #include "MeshCreator.h"
+#include "SurfaceMeasures.h"
 #include "materials/GLFlatColorMaterial.h"
 #include "materials/GLColorMaterial.h"
 #include "materials/GLSkyboxMaterial.h"
@@ -50,8 +51,8 @@ void create_scene(GLScene& root)
     
     model = make_shared<Mesh>();
     MeshCreator::load_from_obj("../Models/bunny.obj", *model);
-    auto min_pos = model->min();
-    auto max_pos = model->max();
+    auto min_pos = min_coordinates(*model);
+    auto max_pos = max_coordinates(*model);
     auto size = max_pos - min_pos;
     auto center = min_pos + 0.5f * size;
     model->transform(glm::translate(glm::mat4(1.f), -center));

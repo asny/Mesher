@@ -32,6 +32,7 @@
 		493CD37C1EAE3F2600E4FB57 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		493CD37E1EAE3F4500E4FB57 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		493CD37F1EAE3F4500E4FB57 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		49A616CD1EC78FD700025A1E /* SurfaceMeasures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SurfaceMeasures.h; sourceTree = "<group>"; };
 		49CC186D1EAFBBA9007EB9AA /* Attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attribute.h; sourceTree = "<group>"; };
 		49CC186E1EAFBBA9007EB9AA /* ID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ID.h; sourceTree = "<group>"; };
 		49CC186F1EAFBBA9007EB9AA /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 				49CC18701EAFBBA9007EB9AA /* MeshCreator.h */,
 				49CC18711EAFBBA9007EB9AA /* Property.h */,
 				49CC18761EAFBE62007EB9AA /* Search.h */,
+				49A616CD1EC78FD700025A1E /* SurfaceMeasures.h */,
 			);
 			name = Mesh;
 			path = ../Mesh/include;
