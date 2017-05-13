@@ -12,7 +12,13 @@ class Morph
     glm::vec3 direction;
     mesh::Mesh *model;
     std::shared_ptr<mesh::Attribute<mesh::VertexID, float>> weights = std::make_shared<mesh::Attribute<mesh::VertexID, float>>();
-    const float RADIUS = 1.;
+    const double RADIUS = 1.;
+    
+    double weight_function(double x)
+    {
+        x = x / RADIUS;
+        return 1. - x*x*(3 - 2 * x);
+    }
     
     void update_weights(const glm::vec3& origin, const mesh::VertexID* vertex)
     {
@@ -22,7 +28,7 @@ class Morph
             auto dist = glm::distance(position, origin);
             if(dist < RADIUS)
             {
-                weights->at(vertex) = RADIUS - dist;
+                weights->at(vertex) = weight_function(dist);
                 
                 for (auto face : vertex->faces())
                 {
@@ -48,8 +54,11 @@ public:
         for(auto vertex = model->vertices_begin(); vertex != model->vertices_end(); vertex = vertex->next())
         {
             float weight = weights->at(vertex);
-            glm::vec3 position = model->position()->at(vertex);
-            model->position()->at(vertex) = position + weight * power * 0.01f * direction;
+            if(weight > 0.)
+            {
+                glm::vec3 position = model->position()->at(vertex);
+                model->position()->at(vertex) = position + weight * power * 0.01f * direction;
+            }
         }
     }
     
