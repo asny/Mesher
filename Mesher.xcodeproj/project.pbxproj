@@ -37,7 +37,6 @@
 		49CC186E1EAFBBA9007EB9AA /* ID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ID.h; sourceTree = "<group>"; };
 		49CC186F1EAFBBA9007EB9AA /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
 		49CC18701EAFBBA9007EB9AA /* MeshCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshCreator.h; sourceTree = "<group>"; };
-		49CC18711EAFBBA9007EB9AA /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Property.h; sourceTree = "<group>"; };
 		49CC18731EAFBC01007EB9AA /* Morph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Morph.cpp; path = source/Morph.cpp; sourceTree = "<group>"; };
 		49CC18741EAFBC01007EB9AA /* Morph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Morph.hpp; path = source/Morph.hpp; sourceTree = "<group>"; };
 		49CC18761EAFBE62007EB9AA /* Search.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Search.h; sourceTree = "<group>"; };
@@ -93,7 +92,6 @@
 				49CC186E1EAFBBA9007EB9AA /* ID.h */,
 				49CC186F1EAFBBA9007EB9AA /* Mesh.h */,
 				49CC18701EAFBBA9007EB9AA /* MeshCreator.h */,
-				49CC18711EAFBBA9007EB9AA /* Property.h */,
 				49CC18761EAFBE62007EB9AA /* Search.h */,
 				49A616CD1EC78FD700025A1E /* SurfaceMeasures.h */,
 			);

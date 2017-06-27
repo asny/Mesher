@@ -56,8 +56,7 @@ public:
             float weight = weights->at(vertex);
             if(weight > 0.)
             {
-                glm::vec3 position = model->position()->at(vertex);
-                model->position()->at(vertex) = position + weight * power * 0.01f * direction;
+                model->position()->at(vertex) += weight * power * 0.01f * direction;
             }
         }
     }
