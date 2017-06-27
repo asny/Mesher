@@ -23,6 +23,7 @@ using namespace gle;
 using namespace mesh;
 
 shared_ptr<Mesh> model;
+GLObject *object, *wireframe_object;
 shared_ptr<bool> wireframe_enabled = make_shared<bool>(true);
 
 void create_axes(GLScene& root)
@@ -59,8 +60,8 @@ void create_scene(GLScene& root)
     float scale = 5.f/std::max(std::max(size.x, size.y), size.z);
     model->transform(glm::scale(glm::mat4(1.f), glm::vec3(scale, scale, scale)));
     
-    root.add_child(make_shared<GLSwitchNode>(wireframe_enabled))->add_leaf(model, wireframe_material);
-    root.add_leaf(model, color_material);
+    wireframe_object = root.add_child(make_shared<GLSwitchNode>(wireframe_enabled))->add_leaf(model, wireframe_material);
+    object = root.add_leaf(model, color_material);
     
     // Create box
     auto box = MeshCreator::create_box(true);
@@ -147,6 +148,8 @@ int main(int argc, const char * argv[])
                 if( e.type == SDL_MOUSEMOTION )
                 {
                     morph.update(static_cast<float>(e.motion.yrel));
+                    object->invalidate();
+                    wireframe_object->invalidate();
                 }
                 if( e.type == SDL_MOUSEBUTTONUP && e.button.button == SDL_BUTTON_LEFT )
                 {
